@@ -51,7 +51,7 @@ lst = [None] * 10 ** 6
 # # for i in range(5):
 # #     print(pr.calibrate(10000))
 
-from benchtest.benchmark import BenchMark
+from benchtest import BenchMark
 
 lst = [None] * 10 ** 6
 
@@ -61,8 +61,7 @@ def search_list():
 
 
 class BenchTestListSearch(BenchMark):
-
-    def bench_test_list_search(self):
+    def test_list_search(self):
         for i in range(100):
             search_list()
 
