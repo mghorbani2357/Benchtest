@@ -1,6 +1,11 @@
 import cProfile
 import pstats
 
+from ._version import get_versions
+
+__version__ = get_versions()['version']
+del get_versions
+
 
 class BenchMark:
     report = dict()
@@ -28,4 +33,3 @@ class BenchMark:
 
             ps = pstats.Stats(pr).sort_stats('tottime')
             ps.print_stats()
-
