@@ -10,18 +10,29 @@ del get_versions
 class BenchMark:
     report = dict()
     functions = list()
+    method_list = list()
+    __setup = None
+    __teardown = None
 
     def __init__(self):
         self.__test()
 
-    def __test(self):
-        method_list = list()
+    def setup(self):
+        pass
 
+    def teardown(self):
+        pass
+
+    def __test(self):
         for function in dir(self):
             if callable(getattr(self, function)) and function.startswith('test'):
-                method_list.append(getattr(self, function))
+                self.method_list.append(getattr(self, function))
 
-        for function in method_list:
+    def bench_run(self):
+
+        self.setup()
+
+        for function in self.method_list:
             pr = cProfile.Profile()
             pr.enable()
 
@@ -33,3 +44,5 @@ class BenchMark:
 
             ps = pstats.Stats(pr).sort_stats('tottime')
             ps.print_stats()
+
+        self.teardown()
